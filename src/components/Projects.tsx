@@ -65,7 +65,7 @@ const Projects: React.FC = () => {
             className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
               selectedFilter === "All"
                 ? "bg-accent text-bg-primary shadow-lg"
-                : "card-lilac text-text-secondary hover:shadow-lg border px-6 py-3"
+                : "card-orange text-text-secondary hover:shadow-lg border px-6 py-3"
             }`}
             onClick={() => setSelectedFilter("All")}
             whileHover={{ scale: 1.05 }}
@@ -80,7 +80,7 @@ const Projects: React.FC = () => {
               className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
                 selectedFilter === tag
                   ? "bg-accent text-bg-primary shadow-lg"
-                  : "card-lilac text-text-secondary hover:shadow-lg border px-6 py-3"
+                  : "card-orange text-text-secondary hover:shadow-lg border px-6 py-3"
               }`}
               onClick={() => setSelectedFilter(tag)}
               whileHover={{ scale: 1.05 }}
@@ -105,9 +105,8 @@ const Projects: React.FC = () => {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                transition={{ duration: 0.5 }}
-                className="card-lilac overflow-hidden group"
-                whileHover={{ y: -10 }}
+                className="card-orange overflow-hidden group"
+                whileHover={{ y: -5 }}
               >
                 {/* Project Image */}
                 <div className="h-48 bg-gradient-to-br from-accent to-accent-dark relative overflow-hidden">
@@ -118,31 +117,8 @@ const Projects: React.FC = () => {
                     </h3>
                   </div>
 
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-accent/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="flex gap-4">
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
-                        title={`View ${project.title} source code on GitHub`}
-                        aria-label={`View ${project.title} source code on GitHub`}
-                      >
-                        <FiGithub size={24} />
-                      </a>
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
-                        title={`View ${project.title} live demo`}
-                        aria-label={`View ${project.title} live demo`}
-                      >
-                        <FiExternalLink size={24} />
-                      </a>
-                    </div>
-                  </div>
+                  {/* Subtle hover overlay for visual feedback */}
+                  <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
 
                 <div className="p-6">

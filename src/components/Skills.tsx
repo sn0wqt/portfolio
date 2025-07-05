@@ -55,7 +55,7 @@ const Skills: React.FC = () => (
           <motion.div
             key={category}
             variants={itemVariants}
-            className="card-lilac p-6"
+            className="card-orange p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               {getCategoryIcon(category)}

@@ -65,9 +65,8 @@ const Experience: React.FC = () => {
                   className="relative pl-16"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-4 top-6 w-4 h-4 bg-accent rounded-full border-4 border-bg-primary shadow-lg"></div>
-
-                  <div className="card-lilac p-6">
+                  <div className="absolute left-4 top-6 w-4 h-4 bg-accent rounded-full border-4 border-bg-primary shadow-lg"></div>{" "}
+                  <div className="card-orange p-6">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                       <h4 className="text-xl font-semibold text-text-primary font-heading">
                         {exp.role}
@@ -127,7 +126,7 @@ const Experience: React.FC = () => {
                   {/* Timeline dot */}
                   <div className="absolute left-4 top-6 w-4 h-4 bg-accent rounded-full border-4 border-bg-primary shadow-lg"></div>
 
-                  <div className="card-lilac p-6">
+                  <div className="card-orange p-6">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                       <h4 className="text-xl font-semibold text-text-primary font-heading">
                         {edu.degree}
@@ -175,7 +174,7 @@ const Experience: React.FC = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="card-lilac p-5 flex justify-between items-center"
+                  className="card-orange p-5 flex justify-between items-center"
                   whileHover={{ y: -5 }}
                 >
                   <div>

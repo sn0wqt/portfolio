@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
               {/* Location */}
-              <div className="flex items-start gap-4 card-lilac p-6">
+              <div className="flex items-start gap-4 card-orange p-6">
                 <div className="p-3 rounded-full bg-accent-light text-accent">
                   <FiMapPin size={20} />
                 </div>
@@ -70,7 +70,7 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4 card-lilac p-6">
+              <div className="flex items-start gap-4 card-orange p-6">
                 <div className="p-3 rounded-full bg-accent-light text-accent">
                   <FiMail size={20} />
                 </div>
@@ -88,7 +88,7 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4 card-lilac p-6">
+              <div className="flex items-start gap-4 card-orange p-6">
                 <div className="p-3 rounded-full bg-accent-light text-accent">
                   <FiPhone size={20} />
                 </div>
@@ -113,7 +113,7 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="card-lilac p-8"
+            className="card-orange p-8"
           >
             <h3 className="text-2xl font-bold text-text-primary mb-8 font-heading">
               Send Me a Message

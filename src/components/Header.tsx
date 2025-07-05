@@ -58,14 +58,13 @@ const Header: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="px-4 md:px-8 lg:px-16 mx-auto max-w-7xl flex justify-between items-center">
-        {/* Logo/Name with gradient effect */}
+        {/* Logo/Name with liquid morphing effect */}
         <motion.div
-          className="text-xl md:text-2xl font-heading font-bold bg-gradient-to-r from-accent via-accent-light to-accent-dark bg-clip-text text-transparent"
-          whileHover={{ scale: 1.05 }}
+          className="text-xl md:text-2xl font-mono font-bold text-accent cursor-pointer liquid-morph"
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <a href="#hero" onClick={() => scrollToSection("hero")}>
-            Asaad F. Rasul
+            <span className="liquid-text">sn0wqt.dev</span>
           </a>
         </motion.div>
 
@@ -102,7 +101,7 @@ const Header: React.FC = () => {
             (item, index) => (
               <motion.a
                 key={item}
-                className="relative text-text-secondary hover:text-accent transition-all duration-300 group py-2 px-3 rounded-lg hover:bg-bg-secondary/50"
+                className="relative text-text-secondary hover:text-accent transition-all duration-300 group py-2 px-3 rounded-lg hover:bg-bg-secondary/50 liquid-morph-nav"
                 href={`#${item.toLowerCase()}`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -110,12 +109,11 @@ const Header: React.FC = () => {
                     .getElementById(item.toLowerCase())
                     ?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
-                whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                {item}
+                <span className="nav-text">{item}</span>
                 <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-light transition-all duration-300 group-hover:w-3/4 transform -translate-x-1/2 rounded-full"></span>
               </motion.a>
             )

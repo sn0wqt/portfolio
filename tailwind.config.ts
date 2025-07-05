@@ -27,18 +27,18 @@ export default {
       error: "rgb(var(--color-error) / <alpha-value>)",
       warning: "rgb(var(--color-warning) / <alpha-value>)",
 
-      // Lilac palette
-      lilac: {
-        50: "rgb(var(--color-lilac-50) / <alpha-value>)",
-        100: "rgb(var(--color-lilac-100) / <alpha-value>)",
-        200: "rgb(var(--color-lilac-200) / <alpha-value>)",
-        300: "rgb(var(--color-lilac-300) / <alpha-value>)",
-        400: "rgb(var(--color-lilac-400) / <alpha-value>)",
-        500: "rgb(var(--color-lilac-500) / <alpha-value>)",
-        600: "rgb(var(--color-lilac-600) / <alpha-value>)",
-        700: "rgb(var(--color-lilac-700) / <alpha-value>)",
-        800: "rgb(var(--color-lilac-800) / <alpha-value>)",
-        900: "rgb(var(--color-lilac-900) / <alpha-value>)",
+      // Orange palette
+      orange: {
+        50: "rgb(var(--color-orange-50) / <alpha-value>)",
+        100: "rgb(var(--color-orange-100) / <alpha-value>)",
+        200: "rgb(var(--color-orange-200) / <alpha-value>)",
+        300: "rgb(var(--color-orange-300) / <alpha-value>)",
+        400: "rgb(var(--color-orange-400) / <alpha-value>)",
+        500: "rgb(var(--color-orange-500) / <alpha-value>)",
+        600: "rgb(var(--color-orange-600) / <alpha-value>)",
+        700: "rgb(var(--color-orange-700) / <alpha-value>)",
+        800: "rgb(var(--color-orange-800) / <alpha-value>)",
+        900: "rgb(var(--color-orange-900) / <alpha-value>)",
       },
 
       // Keep some standard colors for compatibility
@@ -107,9 +107,6 @@ export default {
         },
       },
       boxShadow: {
-        lilac: "0 4px 14px 0 rgba(139, 124, 182, 0.2)",
-        "lilac-lg": "0 10px 25px -3px rgba(139, 124, 182, 0.3)",
-        "inner-lilac": "inset 0 2px 4px 0 rgba(139, 124, 182, 0.1)",
         orange: "0 4px 14px 0 rgba(254, 113, 90, 0.2)",
         "orange-lg": "0 10px 25px -3px rgba(254, 113, 90, 0.3)",
         "inner-orange": "inset 0 2px 4px 0 rgba(254, 113, 90, 0.1)",

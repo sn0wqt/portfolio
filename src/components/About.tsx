@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { portfolioData } from "../data/portfolioData";
+import musashiImage from "../assets/musashi.png";
 
 const About: React.FC = () => (
   <section id="about" className="py-20 bg-bg-primary">
@@ -26,16 +27,12 @@ const About: React.FC = () => (
           transition={{ duration: 0.6 }}
           className="flex justify-center"
         >
-          <div className="relative">
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent shadow-2xl">
-              <img
-                src="https://via.placeholder.com/400x400?text=Asaad+F.+Rasul"
-                alt="Asaad F. Rasul"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Decorative ring */}
-            <div className="absolute -z-10 -bottom-4 -right-4 w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-accent-light opacity-60"></div>
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent shadow-2xl bg-white">
+            <img
+              src={musashiImage}
+              alt="Asaad F. Rasul"
+              className="w-full h-full object-cover object-center"
+            />
           </div>
         </motion.div>
         {/* Bio Column - Now spans 2 columns */}
@@ -47,10 +44,10 @@ const About: React.FC = () => (
           className="relative lg:col-span-2"
         >
           {/* Floating particles background effect */}
-          <div className="absolute -inset-4 bg-gradient-to-br from-accent/5 via-lilac-200/10 to-accent-light/5 rounded-3xl blur-xl opacity-60 animate-pulse"></div>
+          <div className="absolute -inset-4 bg-gradient-to-br from-accent/5 via-orange-200/10 to-accent-light/5 rounded-3xl blur-xl opacity-60 animate-pulse"></div>
 
           {/* Main content card */}
-          <div className="relative card-lilac p-8 group">
+          <div className="relative card-orange p-8 group">
             {/* Decorative corner elements */}
             <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-accent/30 rounded-tr-lg"></div>
             <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-accent/30 rounded-bl-lg"></div>

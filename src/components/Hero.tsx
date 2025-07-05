@@ -55,8 +55,8 @@ const Hero: React.FC = () => {
             <TypedText
               strings={[
                 "Backend Engineer",
-                "Future Data Scientist",
                 "Reverse Engineer",
+                "Future Data Scientist",
               ]}
             />
           </motion.div>

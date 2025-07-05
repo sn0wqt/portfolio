@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
         <div className="flex justify-center mb-8">
           <motion.button
             onClick={scrollToTop}
-            className="p-4 rounded-full bg-accent text-bg-primary shadow-xl hover:shadow-2xl"
+            className="p-4 rounded-full bg-accent text-bg-primary hover:shadow-2xl"
             whileHover={{ y: -5, scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Scroll to top"
