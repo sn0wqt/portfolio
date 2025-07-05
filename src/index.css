@@ -1,42 +1,68 @@
 @import "tailwindcss";
 
-/* CSS Variables for theming */
+/* Enhanced CSS Variables with your specific requirements */
 :root {
-  --color-bg-primary: 255 255 255;
-  --color-bg-secondary: 249 250 251;
-  --color-text-primary: 17 24 39;
-  --color-text-secondary: 75 85 99;
-  --color-accent: 139 124 182;
-  
-  --color-primary-50: 249 247 255;
-  --color-primary-100: 243 239 255;
-  --color-primary-200: 233 225 255;
-  --color-primary-300: 212 194 255;
-  --color-primary-400: 181 163 217;
-  --color-primary-500: 139 124 182;
-  --color-primary-600: 107 91 149;
-  --color-primary-700: 90 74 124;
-  --color-primary-800: 74 61 102;
-  --color-primary-900: 61 51 84;
+  /* Base colors - Light Mode - Enhanced for better contrast */
+  --color-bg-primary: 251 249 255; /* Very light lilac base */
+  --color-bg-secondary: 243 239 255; /* Light lilac secondary */
+  --color-bg-tertiary: 231 221 255; /* Lilac cards */
+  --color-text-primary: 61 51 84; /* Dark lilac for strong contrast */
+  --color-text-secondary: 90 74 124; /* Medium lilac */
+  --color-text-muted: 107 91 149; /* Readable lilac */
+
+  /* Lilac accent system - Enhanced for better visibility */
+  --color-accent: 107 91 149; /* Strong lilac for light mode */
+  --color-accent-light: 139 124 182; /* Medium lilac */
+  --color-accent-dark: 90 74 124; /* Dark lilac */
+
+  /* Lilac palette */
+  --color-lilac-50: 251 249 255;
+  --color-lilac-100: 243 239 255;
+  --color-lilac-200: 231 221 255;
+  --color-lilac-300: 212 194 255;
+  --color-lilac-400: 181 163 217;
+  --color-lilac-500: 139 124 182;
+  --color-lilac-600: 107 91 149;
+  --color-lilac-700: 90 74 124;
+  --color-lilac-800: 74 61 102;
+  --color-lilac-900: 61 51 84;
+
+  /* Success/Error colors optimized for light mode */
+  --color-success: 34 197 94; /* Green that works on light */
+  --color-error: 239 68 68; /* Red that works on light */
+  --color-warning: 245 158 11; /* Amber that works on light */
 }
 
 [data-theme="dark"] {
-  --color-bg-primary: 26 26 26;
-  --color-bg-secondary: 31 41 55;
-  --color-text-primary: 243 244 246;
-  --color-text-secondary: 156 163 175;
-  --color-accent: 181 163 217;
-  
-  --color-primary-50: 61 51 84;
-  --color-primary-100: 74 61 102;
-  --color-primary-200: 90 74 124;
-  --color-primary-300: 107 91 149;
-  --color-primary-400: 139 124 182;
-  --color-primary-500: 181 163 217;
-  --color-primary-600: 196 132 252;
-  --color-primary-700: 212 194 255;
-  --color-primary-800: 233 225 255;
-  --color-primary-900: 249 247 255;
+  /* Base colors - Dark Mode matching the design */
+  --color-bg-primary: 18 30 40; /* #121E28 - Main dark navy background */
+  --color-bg-secondary: 24 35 45; /* #18232D - Header/bar background */
+  --color-bg-tertiary: 28 40 52; /* Slightly lighter for cards */
+  --color-text-primary: 248 250 252; /* Very light for contrast */
+  --color-text-secondary: 203 213 225; /* Light slate */
+  --color-text-muted: 148 163 184; /* Medium slate */
+
+  /* Orange accent system for dark mode */
+  --color-accent: 254 113 90; /* #FE715A - Main orange accent */
+  --color-accent-light: 255 135 110; /* Lighter orange */
+  --color-accent-dark: 240 95 75; /* Darker orange */
+
+  /* Orange palette for dark mode */
+  --color-lilac-50: 61 51 84;
+  --color-lilac-100: 74 61 102;
+  --color-lilac-200: 90 74 124;
+  --color-lilac-300: 107 91 149;
+  --color-lilac-400: 139 124 182;
+  --color-lilac-500: 254 113 90; /* Orange as primary color */
+  --color-lilac-600: 255 135 110;
+  --color-lilac-700: 255 158 130;
+  --color-lilac-800: 255 180 150;
+  --color-lilac-900: 255 202 170;
+
+  /* Success/Error colors optimized for dark mode */
+  --color-success: 74 222 128; /* Lighter green for dark */
+  --color-error: 248 113 113; /* Lighter red for dark */
+  --color-warning: 251 191 36; /* Lighter amber for dark */
 }
 
 /* Global styles */
@@ -48,30 +74,242 @@ body {
   font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
   background-color: rgb(var(--color-bg-primary));
   color: rgb(var(--color-text-primary));
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: Poppins, system-ui, sans-serif;
   font-weight: 600;
 }
 
-/* Background gradient animation */
+/* Beautiful gradient backgrounds */
+.bg-gradient-lilac {
+  background: linear-gradient(
+    135deg,
+    rgb(var(--color-lilac-100)),
+    rgb(var(--color-lilac-200)),
+    rgb(var(--color-lilac-300))
+  );
+}
+
+[data-theme="dark"] .bg-gradient-lilac {
+  background: linear-gradient(
+    135deg,
+    rgb(var(--color-bg-secondary)),
+    rgb(var(--color-bg-tertiary)),
+    rgb(28 40 52)
+  );
+}
+
 .bg-gradient-animated {
-  background: linear-gradient(-45deg, 
-    rgb(var(--color-primary-400)), 
-    rgb(var(--color-primary-500)), 
-    rgb(var(--color-primary-600)), 
-    rgb(var(--color-primary-700))
+  background: linear-gradient(
+    -45deg,
+    rgb(var(--color-lilac-400)),
+    rgb(var(--color-lilac-500)),
+    rgb(var(--color-lilac-600)),
+    rgb(var(--color-lilac-700))
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+[data-theme="dark"] .bg-gradient-animated {
+  background: linear-gradient(
+    -45deg,
+    rgb(var(--color-accent) / 0.8),
+    rgb(var(--color-accent-light) / 0.6),
+    rgb(var(--color-accent-dark) / 0.9),
+    rgb(var(--color-accent) / 0.7)
   );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glass effect for cards */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .glass-effect {
+  background: rgba(24, 35, 45, 0.8); /* Using bar bg color with transparency */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 113, 90, 0.1); /* Orange border */
+}
+
+.card-lilac {
+  @apply rounded-3xl border;
+  background: rgb(var(--color-bg-tertiary) / 0.95);
+  border-color: rgb(var(--color-accent) / 0.3);
+  box-shadow: 0 4px 24px 0 rgba(107, 91, 149, 0.18),
+    0 1.5px 8px 0 rgba(139, 124, 182, 0.12);
+  transition: box-shadow 0.2s, transform 0.16s;
+}
+.card-lilac:hover {
+  box-shadow: 0 8px 32px 0 rgba(107, 91, 149, 0.28),
+    0 3px 16px 0 rgba(139, 124, 182, 0.18);
+  transform: translateY(-4px) scale(1.012);
+}
+
+[data-theme="dark"] .card-lilac {
+  background: rgb(var(--color-bg-tertiary) / 0.94);
+  border-color: rgb(var(--color-accent) / 0.19); /* Orange border */
+  box-shadow: 0 4px 24px 0 rgba(254, 113, 90, 0.15),
+    /* Orange shadow */ 0 1.5px 8px 0 rgba(254, 113, 90, 0.13);
+}
+[data-theme="dark"] .card-lilac:hover {
+  box-shadow: 0 8px 32px 0 rgba(254, 113, 90, 0.24),
+    /* Orange shadow */ 0 3px 16px 0 rgba(254, 113, 90, 0.17);
+}
+
+.section-lilac-accent-top {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75vw;
+  height: 5rem;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  filter: blur(32px);
+  opacity: 0.35;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-accent) / 0.12) 0%,
+    rgb(var(--color-accent-light) / 0.1) 100%
+  );
+}
+
+.section-lilac-accent-bottom {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65vw;
+  height: 3.5rem;
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  filter: blur(28px);
+  opacity: 0.23;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-accent-light) / 0.1) 0%,
+    rgb(var(--color-accent) / 0.08) 100%
+  );
+}
+
+/* Enhanced section styling to match Skills component */
+.section-lilac {
+  @apply relative py-20 overflow-hidden;
+  background: rgb(var(--color-bg-secondary));
+}
+
+[data-theme="dark"] .section-lilac {
+  background: rgb(var(--color-bg-secondary)); /* Using bar bg color #18232D */
+}
+
+/* Beautiful button styling matching the theme */
+.btn-primary {
+  @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 inline-flex items-center gap-2;
+  background: rgb(var(--color-accent));
+  color: white; /* White text on orange background */
+  box-shadow: 0 4px 16px 0 rgba(254, 113, 90, 0.24); /* Orange shadow */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px 0 rgba(254, 113, 90, 0.32); /* Orange shadow */
+  background: rgb(var(--color-accent-dark));
+}
+
+[data-theme="dark"] .btn-primary {
+  background: rgb(var(--color-accent));
+  color: white;
+  box-shadow: 0 4px 16px 0 rgba(254, 113, 90, 0.24);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: rgb(var(--color-accent-dark));
+  box-shadow: 0 8px 24px 0 rgba(254, 113, 90, 0.32);
+}
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 inline-flex items-center gap-2 border-2;
+  border-color: rgb(var(--color-accent));
+  color: rgb(var(--color-accent));
+  background: rgb(var(--color-bg-primary) / 0.8);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: rgb(var(--color-bg-primary));
+  border-color: rgb(var(--color-accent-light));
+  box-shadow: 0 8px 24px 0 rgba(107, 91, 149, 0.15);
+}
+
+/* Mouse scroll indicator styles */
+.scroll-downs {
+  position: relative;
+  width: 28px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mousey {
+  width: 3px;
+  padding: 8px 12px;
+  height: 28px;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  opacity: 0.85;
+  box-sizing: content-box;
+}
+
+.scroller {
+  width: 3px;
+  height: 8px;
+  border-radius: 25%;
+  background-color: #ffffff;
+  animation-name: scroll;
+  animation-duration: 2.2s;
+  animation-timing-function: cubic-bezier(0.15, 0.41, 0.69, 0.94);
+  animation-iteration-count: infinite;
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
 }

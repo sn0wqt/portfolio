@@ -1,48 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { portfolioData } from '../data/portfolioData';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { portfolioData } from "../data/portfolioData";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
-// Extract all unique project tags for filtering
 const allTags = Array.from(
-  new Set(portfolioData.selectedProjects.flatMap(project => project.tags))
+  new Set(portfolioData.selectedProjects.flatMap((project) => project.tags))
 );
 
 const Projects: React.FC = () => {
-  const [selectedFilter, setSelectedFilter] = useState('All');
-  const [filteredProjects, setFilteredProjects] = useState(portfolioData.selectedProjects);
-  
-  // Apply filter when selection changes
+  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [filteredProjects, setFilteredProjects] = useState(
+    portfolioData.selectedProjects
+  );
+
   useEffect(() => {
-    if (selectedFilter === 'All') {
+    if (selectedFilter === "All") {
       setFilteredProjects(portfolioData.selectedProjects);
     } else {
-      const filtered = portfolioData.selectedProjects.filter(project => 
+      const filtered = portfolioData.selectedProjects.filter((project) =>
         project.tags.includes(selectedFilter)
       );
       setFilteredProjects(filtered);
     }
   }, [selectedFilter]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
-    <section id="projects" className="section bg-gray-50 dark:bg-gray-900">
-      <div className="container-custom">
+    <section id="projects" className="py-20 bg-bg-primary">
+      <div className="px-4 md:px-8 lg:px-16 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,14 +47,14 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-white mb-4">
-            My <span className="text-light-accent dark:text-dark-accent">Projects</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4 font-heading">
+            My <span className="text-accent">Projects</span>
           </h2>
-          <div className="w-20 h-1 bg-light-accent dark:bg-dark-accent mx-auto"></div>
+          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
         </motion.div>
 
         {/* Filter Buttons */}
-        <motion.div 
+        <motion.div
           className="flex flex-wrap justify-center gap-4 mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,25 +62,25 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <motion.button
-            className={`px-4 py-2 rounded-full transition-all ${
-              selectedFilter === 'All'
-                ? 'bg-light-accent dark:bg-dark-accent text-white'
-                : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-zinc-600'
+            className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
+              selectedFilter === "All"
+                ? "bg-accent text-bg-primary shadow-lg"
+                : "card-lilac text-text-secondary hover:shadow-lg border px-6 py-3"
             }`}
-            onClick={() => setSelectedFilter('All')}
+            onClick={() => setSelectedFilter("All")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             All
           </motion.button>
-          
+
           {allTags.map((tag) => (
             <motion.button
               key={tag}
-              className={`px-4 py-2 rounded-full transition-all ${
+              className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
                 selectedFilter === tag
-                  ? 'bg-light-accent dark:bg-dark-accent text-white'
-                  : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-zinc-600'
+                  ? "bg-accent text-bg-primary shadow-lg"
+                  : "card-lilac text-text-secondary hover:shadow-lg border px-6 py-3"
               }`}
               onClick={() => setSelectedFilter(tag)}
               whileHover={{ scale: 1.05 }}
@@ -96,7 +93,7 @@ const Projects: React.FC = () => {
 
         {/* Projects Grid */}
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={selectedFilter}
             variants={containerVariants}
             initial="hidden"
@@ -109,52 +106,82 @@ const Projects: React.FC = () => {
                 key={project.title}
                 variants={itemVariants}
                 transition={{ duration: 0.5 }}
-                className="card overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                className="card-lilac overflow-hidden group"
                 whileHover={{ y: -10 }}
               >
-                {/* Project Image - using placeholder gradient with better dark mode support */}
-                <div className="h-48 bg-gradient-to-r from-light-accent/40 to-lilac-400/40 dark:from-dark-accent/40 dark:to-lilac-600/40 opacity-75 dark:opacity-90">
-                  <div className="h-full w-full flex items-center justify-center">
-                    <h3 className="text-gray-800 dark:text-white font-bold text-xl drop-shadow-md">{project.title}</h3>
+                {/* Project Image */}
+                <div className="h-48 bg-gradient-to-br from-accent to-accent-dark relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="h-full w-full flex items-center justify-center relative z-10">
+                    <h3 className="text-bg-primary font-bold text-xl drop-shadow-lg">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-accent/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="flex gap-4">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
+                        title={`View ${project.title} source code on GitHub`}
+                        aria-label={`View ${project.title} source code on GitHub`}
+                      >
+                        <FiGithub size={24} />
+                      </a>
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
+                        title={`View ${project.title} live demo`}
+                        aria-label={`View ${project.title} live demo`}
+                      >
+                        <FiExternalLink size={24} />
+                      </a>
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
-                  {/* Project Title */}
-                  <h3 className="text-xl font-bold text-light-text dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-text-primary mb-3 font-heading">
                     {project.title}
                   </h3>
-                  
-                  {/* Project Description */}
-                  <p className="text-light-text dark:text-gray-300 opacity-90 mb-4">
+
+                  <p className="text-text-secondary mb-4 leading-relaxed">
                     {project.description}
                   </p>
-                  
+
                   {/* Project Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="badge bg-light-accent/10 text-light-accent dark:bg-dark-accent/10 dark:text-dark-accent">
+                      <span
+                        key={tagIndex}
+                        className="px-3 py-1 text-xs rounded-full font-medium bg-accent text-bg-primary"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  
+
                   {/* Project Links */}
                   <div className="flex gap-4">
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+                      className="text-text-secondary hover:text-accent transition-colors duration-200"
                       aria-label={`View ${project.title} source code on GitHub`}
                     >
                       <FiGithub size={20} />
                     </a>
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+                      className="text-text-secondary hover:text-accent transition-colors duration-200"
                       aria-label={`View ${project.title} live demo`}
                     >
                       <FiExternalLink size={20} />
