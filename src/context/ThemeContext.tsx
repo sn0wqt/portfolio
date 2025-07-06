@@ -13,20 +13,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const getInitialTheme = (): Theme => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
-
-    if (savedTheme && ["light", "dark"].includes(savedTheme)) {
-      return savedTheme;
-    }
-
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      return "dark";
-    }
-
-    return "light";
+    // We can safely read from the DOM since our inline script has already set this
+    const currentTheme = document.documentElement.getAttribute(
+      "data-theme"
+    ) as Theme;
+    return currentTheme === "dark" ? "dark" : "light";
   };
 
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
@@ -36,6 +27,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Remove the theme-initializing class once React is fully loaded
+  useEffect(() => {
+    document.documentElement.classList.remove("theme-initializing");
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));

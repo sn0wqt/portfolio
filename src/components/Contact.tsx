@@ -55,53 +55,59 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
               {/* Location */}
-              <div className="flex items-start gap-4 card-orange p-6">
-                <div className="p-3 rounded-full bg-accent-light text-accent">
-                  <FiMapPin size={20} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
-                    Location
-                  </h4>
-                  <p className="text-text-secondary">
-                    {portfolioData.contact.location}
-                  </p>
+              <div className="card-orange p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-accent-light text-accent">
+                    <FiMapPin size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
+                      Location
+                    </h4>
+                    <p className="text-text-secondary">
+                      {portfolioData.contact.location}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4 card-orange p-6">
-                <div className="p-3 rounded-full bg-accent-light text-accent">
-                  <FiMail size={20} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
-                    Email
-                  </h4>
-                  <a
-                    href={`mailto:${portfolioData.contact.email}`}
-                    className="text-text-secondary hover:text-accent transition-colors"
-                  >
-                    {portfolioData.contact.email}
-                  </a>
+              <div className="card-orange p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-accent-light text-accent">
+                    <FiMail size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
+                      Email
+                    </h4>
+                    <a
+                      href={`mailto:${portfolioData.contact.email}`}
+                      className="text-text-secondary hover:text-accent transition-colors"
+                    >
+                      {portfolioData.contact.email}
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4 card-orange p-6">
-                <div className="p-3 rounded-full bg-accent-light text-accent">
-                  <FiPhone size={20} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
-                    Phone
-                  </h4>
-                  <a
-                    href={`tel:${portfolioData.contact.phone}`}
-                    className="text-text-secondary hover:text-accent transition-colors"
-                  >
-                    {portfolioData.contact.phone}
-                  </a>
+              <div className="card-orange p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-accent-light text-accent">
+                    <FiPhone size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-text-primary mb-1 font-heading">
+                      Phone
+                    </h4>
+                    <a
+                      href={`tel:${portfolioData.contact.phone}`}
+                      className="text-text-secondary hover:text-accent transition-colors"
+                    >
+                      {portfolioData.contact.phone}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -113,134 +119,138 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="card-orange p-8"
           >
-            <h3 className="text-2xl font-bold text-text-primary mb-8 font-heading">
-              Send Me a Message
-            </h3>
+            <div className="card-orange p-8">
+              <h3 className="text-2xl font-bold text-text-primary mb-8 font-heading">
+                Send Me a Message
+              </h3>
 
-            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-              {/* Name Input */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-text-primary mb-2"
+              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                {/* Name Input */}
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
+                      errors.name
+                        ? "border-error focus:ring-error"
+                        : "border-accent/30 focus:border-accent focus:ring-accent"
+                    } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                    placeholder="John Doe"
+                    {...register("name", { required: "Name is required" })}
+                  />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-error">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Email Input */}
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
+                      errors.email
+                        ? "border-error focus:ring-error"
+                        : "border-accent/30 focus:border-accent focus:ring-accent"
+                    } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                    placeholder="john@example.com"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-error">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Subject Input */}
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
+                      errors.subject
+                        ? "border-error focus:ring-error"
+                        : "border-accent/30 focus:border-accent focus:ring-accent"
+                    } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                    placeholder="Project Discussion"
+                    {...register("subject", {
+                      required: "Subject is required",
+                    })}
+                  />
+                  {errors.subject && (
+                    <p className="mt-1 text-sm text-error">
+                      {errors.subject.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Message Input */}
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-text-primary mb-2"
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={6}
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 resize-none ${
+                      errors.message
+                        ? "border-error focus:ring-error"
+                        : "border-accent/30 focus:border-accent focus:ring-accent"
+                    } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                    placeholder="Write your message here..."
+                    {...register("message", {
+                      required: "Message is required",
+                    })}
+                  ></textarea>
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-error">
+                      {errors.message.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Submit Button */}
+                <motion.button
+                  type="submit"
+                  className="btn-primary w-full justify-center"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
-                    errors.name
-                      ? "border-error focus:ring-error"
-                      : "border-accent/30 focus:border-accent focus:ring-accent"
-                  } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
-                  placeholder="John Doe"
-                  {...register("name", { required: "Name is required" })}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-error">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Email Input */}
-              {/* Email Input */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-text-primary mb-2"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
-                    errors.email
-                      ? "border-error focus:ring-error"
-                      : "border-accent/30 focus:border-accent focus:ring-accent"
-                  } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
-                  placeholder="john@example.com"
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-error">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Subject Input */}
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-text-primary mb-2"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 ${
-                    errors.subject
-                      ? "border-error focus:ring-error"
-                      : "border-accent/30 focus:border-accent focus:ring-accent"
-                  } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
-                  placeholder="Project Discussion"
-                  {...register("subject", { required: "Subject is required" })}
-                />
-                {errors.subject && (
-                  <p className="mt-1 text-sm text-error">
-                    {errors.subject.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Message Input */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-text-primary mb-2"
-                >
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={6}
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-200 resize-none ${
-                    errors.message
-                      ? "border-error focus:ring-error"
-                      : "border-accent/30 focus:border-accent focus:ring-accent"
-                  } bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-opacity-50`}
-                  placeholder="Write your message here..."
-                  {...register("message", { required: "Message is required" })}
-                ></textarea>
-                {errors.message && (
-                  <p className="mt-1 text-sm text-error">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                className="btn-primary w-full justify-center"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Send Message <FiSend />
-              </motion.button>
-            </form>
+                  Send Message <FiSend />
+                </motion.button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>

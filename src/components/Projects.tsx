@@ -2,6 +2,42 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "../data/portfolioData";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
+
+// Card Animations on First Load
+// Container animation that controls the overall grid
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// Individual card animation
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4 },
+  },
+};
+
+// Define project interface
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  githubUrl: string;
+  liveUrl: string;
+  appStoreUrl?: string;
+  playStoreUrl?: string;
+  imageUrl: string;
+}
 
 const allTags = Array.from(
   new Set(portfolioData.selectedProjects.flatMap((project) => project.tags))
@@ -9,33 +45,21 @@ const allTags = Array.from(
 
 const Projects: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const [filteredProjects, setFilteredProjects] = useState(
-    portfolioData.selectedProjects
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>(
+    portfolioData.selectedProjects as Project[]
   );
 
   useEffect(() => {
+    // When filter changes, update filtered projects immediately
     if (selectedFilter === "All") {
-      setFilteredProjects(portfolioData.selectedProjects);
+      setFilteredProjects(portfolioData.selectedProjects as Project[]);
     } else {
-      const filtered = portfolioData.selectedProjects.filter((project) =>
-        project.tags.includes(selectedFilter)
+      const filtered = (portfolioData.selectedProjects as Project[]).filter(
+        (project) => project.tags.includes(selectedFilter)
       );
       setFilteredProjects(filtered);
     }
   }, [selectedFilter]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   return (
     <section id="projects" className="py-20 bg-bg-primary">
@@ -62,14 +86,25 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <motion.button
-            className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
+            className={`px-6 py-3 rounded-full font-medium ${
               selectedFilter === "All"
-                ? "bg-accent text-bg-primary shadow-lg"
-                : "card-orange text-text-secondary hover:shadow-lg border px-6 py-3"
+                ? "filter-btn-selected"
+                : "card-orange text-text-secondary border-2"
             }`}
             onClick={() => setSelectedFilter("All")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            initial={false}
+            animate={{
+              scale: selectedFilter === "All" ? 1.05 : 1,
+              transition: { duration: 0.3, ease: "easeInOut" },
+            }}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{
+              scale: 0.95,
+              transition: { duration: 0.1 },
+            }}
           >
             All
           </motion.button>
@@ -77,14 +112,25 @@ const Projects: React.FC = () => {
           {allTags.map((tag) => (
             <motion.button
               key={tag}
-              className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
+              className={`px-6 py-3 rounded-full font-medium ${
                 selectedFilter === tag
-                  ? "bg-accent text-bg-primary shadow-lg"
-                  : "card-orange text-text-secondary hover:shadow-lg border px-6 py-3"
+                  ? "filter-btn-selected"
+                  : "card-orange text-text-secondary border-2"
               }`}
               onClick={() => setSelectedFilter(tag)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              initial={false}
+              animate={{
+                scale: selectedFilter === tag ? 1.05 : 1,
+                transition: { duration: 0.3, ease: "easeInOut" },
+              }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{
+                scale: 0.95,
+                transition: { duration: 0.1 },
+              }}
             >
               {tag}
             </motion.button>
@@ -97,71 +143,117 @@ const Projects: React.FC = () => {
             key={selectedFilter}
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
             exit={{ opacity: 0, y: 20 }}
+            id="projects-grid"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            style={{ gridAutoRows: "1fr" }}
           >
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className="card-orange overflow-hidden group"
-                whileHover={{ y: -5 }}
+                className="h-full"
+                layout
               >
-                {/* Project Image */}
-                <div className="h-48 bg-gradient-to-br from-accent to-accent-dark relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="h-full w-full flex items-center justify-center relative z-10">
-                    <h3 className="text-bg-primary font-bold text-xl drop-shadow-lg">
-                      {project.title}
-                    </h3>
+                <div className="card-orange overflow-hidden group flex flex-col h-full">
+                  {/* Project Image */}
+                  <div className="h-48 bg-gradient-to-br from-accent to-accent-dark relative overflow-hidden">
+                    {project.imageUrl ? (
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      /* Fallback if no image is available */
+                      <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-accent to-accent-dark">
+                        <h3 className="text-white font-bold text-xl drop-shadow-lg">
+                          {project.title}
+                        </h3>
+                      </div>
+                    )}
+
+                    {/* Title overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                      <div className="text-center px-4">
+                        <h3 className="text-white font-bold text-xl">
+                          {project.title}
+                        </h3>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Subtle hover overlay for visual feedback */}
-                  <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <p className="text-text-secondary mb-4 leading-relaxed flex-grow">
+                      {project.description}
+                    </p>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-text-primary mb-3 font-heading">
-                    {project.title}
-                  </h3>
+                    {/* Project Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="px-3 py-1 text-xs rounded-full font-medium bg-accent text-bg-primary"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
-                  <p className="text-text-secondary mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Project Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-3 py-1 text-xs rounded-full font-medium bg-accent text-bg-primary"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Project Links */}
-                  <div className="flex gap-4">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-accent transition-colors duration-200"
-                      aria-label={`View ${project.title} source code on GitHub`}
-                    >
-                      <FiGithub size={20} />
-                    </a>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-accent transition-colors duration-200"
-                      aria-label={`View ${project.title} live demo`}
-                    >
-                      <FiExternalLink size={20} />
-                    </a>
+                    {/* Project Links */}
+                    {(project.githubUrl ||
+                      project.liveUrl ||
+                      project.appStoreUrl ||
+                      project.playStoreUrl) && (
+                      <div className="flex gap-4 mt-auto">
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-accent transition-colors duration-200"
+                            aria-label={`View ${project.title} source code on GitHub`}
+                          >
+                            <FiGithub size={20} />
+                          </a>
+                        )}
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-accent transition-colors duration-200"
+                            aria-label={`View ${project.title} live demo`}
+                          >
+                            <FiExternalLink size={20} />
+                          </a>
+                        )}
+                        {project.appStoreUrl && (
+                          <a
+                            href={project.appStoreUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-accent transition-colors duration-200"
+                            aria-label={`Download ${project.title} from App Store`}
+                          >
+                            <FaApple size={20} />
+                          </a>
+                        )}
+                        {project.playStoreUrl && (
+                          <a
+                            href={project.playStoreUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-secondary hover:text-accent transition-colors duration-200"
+                            aria-label={`Download ${project.title} from Google Play Store`}
+                          >
+                            <FaGooglePlay size={20} />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>

@@ -43,14 +43,13 @@ const About: React.FC = () => (
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative lg:col-span-2"
         >
-          {/* Floating particles background effect */}
-          <div className="absolute -inset-4 bg-gradient-to-br from-accent/5 via-orange-200/10 to-accent-light/5 rounded-3xl blur-xl opacity-60 animate-pulse"></div>
+          {/* No floating particles - clean solid design */}
 
           {/* Main content card */}
           <div className="relative card-orange p-8 group">
             {/* Decorative corner elements */}
-            <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-accent/30 rounded-tr-lg"></div>
-            <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-accent/30 rounded-bl-lg"></div>
+            <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-accent rounded-tr-lg"></div>
+            <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-accent rounded-bl-lg"></div>
 
             {/* Floating icon */}
             <div className="absolute top-1 left-1 w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -72,7 +71,7 @@ const About: React.FC = () => (
             <div className="pt-4">
               <h3 className="text-2xl font-semibold text-text-primary mb-4 flex items-center gap-3">
                 Backend Engineer & Future Data Scientist
-                <div className="w-2 h-2 bg-accent rounded-full animate-ping"></div>
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
               </h3>
 
               <div className="space-y-4 mb-8">
@@ -92,7 +91,7 @@ const About: React.FC = () => (
               </div>
 
               {/* Languages Section */}
-              <div className="mb-6 p-4 bg-bg-tertiary/50 rounded-xl border border-accent-light/10">
+              <div className="mb-6 p-4 language-container">
                 <h4 className="text-lg font-semibold text-text-primary mb-3 flex items-center gap-2">
                   <svg
                     className="w-5 h-5 text-accent"
@@ -113,11 +112,10 @@ const About: React.FC = () => (
                   {portfolioData.languages.map((language, index) => (
                     <motion.div
                       key={index}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 1 }}
                       whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className="flex items-center bg-accent/10 rounded-full px-3 py-1 border border-accent/20 hover:bg-accent/20 transition-colors duration-300"
+                      transition={{ duration: 0.3 }}
+                      className="flex items-center rounded-full px-3 py-1 border-2 border-accent hover:border-accent-light transition-colors duration-300 bg-bg-tertiary"
                     >
                       <span className="text-text-secondary text-sm font-medium">
                         {language.name}
@@ -132,8 +130,7 @@ const About: React.FC = () => (
               </div>
             </div>
 
-            {/* Subtle animated border */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/20 via-transparent to-accent-light/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            {/* No animated border - using solid border style */}
           </div>
         </motion.div>
       </div>

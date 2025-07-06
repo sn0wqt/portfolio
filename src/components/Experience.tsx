@@ -171,22 +171,19 @@ const Experience: React.FC = () => {
 
             <div className="space-y-4">
               {portfolioData.certifications.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="card-orange p-5 flex justify-between items-center"
-                  whileHover={{ y: -5 }}
-                >
-                  <div>
-                    <h4 className="text-lg font-semibold text-text-primary font-heading">
-                      {cert.name}
-                    </h4>
-                    <p className="text-text-secondary text-sm">
-                      {cert.institution}
-                    </p>
-                  </div>
+                <motion.div key={index} variants={itemVariants}>
+                  <div className="card-orange p-5 flex justify-between items-center">
+                    <div>
+                      <h4 className="text-lg font-semibold text-text-primary font-heading">
+                        {cert.name}
+                      </h4>
+                      <p className="text-text-secondary text-sm">
+                        {cert.institution}
+                      </p>
+                    </div>
 
-                  <div className="text-accent font-medium">{cert.date}</div>
+                    <div className="text-accent font-medium">{cert.date}</div>
+                  </div>
                 </motion.div>
               ))}
             </div>

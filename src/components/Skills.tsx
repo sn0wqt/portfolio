@@ -50,33 +50,43 @@ const Skills: React.FC = () => (
       >
         My Core <span className="text-accent">Skills</span>
       </motion.h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 grid-auto-rows-fr">
         {Object.entries(portfolioData.coreSkills).map(([category, skills]) => (
-          <motion.div
-            key={category}
-            variants={itemVariants}
-            className="card-orange p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              {getCategoryIcon(category)}
-              <h4 className="text-xl font-semibold text-text-primary capitalize">
-                {category}
-              </h4>
+          <motion.div key={category} variants={itemVariants} className="h-full">
+            <div className="card-orange p-6 flex flex-col h-full">
+              <div className="flex items-center gap-3 mb-4">
+                {getCategoryIcon(category)}
+                <h4 className="text-xl font-semibold text-text-primary capitalize">
+                  {category}
+                </h4>
+              </div>
+              <ul className="space-y-3 flex-grow">
+                {skills.map((skill, idx) => (
+                  <li key={idx}>
+                    <motion.div
+                      className="text-text-secondary flex items-center"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <svg
+                        className="w-4 h-4 text-accent mr-3 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>{skill}</span>
+                    </motion.div>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-2">
-              {skills.map((skill, idx) => (
-                <li key={idx}>
-                  <motion.div
-                    className="text-text-secondary flex items-center"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="inline-block w-2 h-2 rounded-full bg-accent mr-2"></div>
-                    {skill}
-                  </motion.div>
-                </li>
-              ))}
-            </ul>
           </motion.div>
         ))}
       </div>

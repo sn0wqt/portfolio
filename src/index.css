@@ -158,28 +158,34 @@ h6 {
 }
 
 .card-orange {
-  @apply rounded-3xl border;
+  @apply rounded-3xl border-2;
   background: rgb(var(--color-bg-tertiary) / 0.95);
-  border-color: rgb(var(--color-accent) / 0.3);
-  box-shadow: 0 4px 24px 0 rgba(254, 113, 90, 0.18),
-    0 1.5px 8px 0 rgba(255, 135, 110, 0.12);
-  transition: box-shadow 0.2s, transform 0.16s;
+  border-color: rgb(var(--color-accent));
+  transition: transform 0.16s;
 }
 .card-orange:hover {
-  box-shadow: 0 8px 32px 0 rgba(254, 113, 90, 0.28),
-    0 3px 16px 0 rgba(255, 135, 110, 0.18);
   transform: translateY(-4px) scale(1.012);
+  border-color: rgb(var(--color-accent-light));
 }
 
 [data-theme="dark"] .card-orange {
   background: rgb(var(--color-bg-tertiary) / 0.94);
-  border-color: rgb(var(--color-accent) / 0.19); /* Orange border */
-  box-shadow: 0 4px 24px 0 rgba(254, 113, 90, 0.15),
-    /* Orange shadow */ 0 1.5px 8px 0 rgba(254, 113, 90, 0.13);
+  border-color: rgb(var(--color-accent)); /* Solid orange border */
 }
 [data-theme="dark"] .card-orange:hover {
-  box-shadow: 0 8px 32px 0 rgba(254, 113, 90, 0.24),
-    /* Orange shadow */ 0 3px 16px 0 rgba(254, 113, 90, 0.17);
+  border-color: rgb(var(--color-accent-light));
+}
+
+/* Language container styling to match the main card */
+.language-container {
+  @apply rounded-xl border-2;
+  border-color: rgb(var(--color-accent));
+  background: rgb(var(--color-bg-tertiary) / 0.94);
+}
+
+[data-theme="dark"] .language-container {
+  background: rgb(var(--color-bg-tertiary) / 0.94);
+  border-color: rgb(var(--color-accent));
 }
 
 .section-orange-accent-top {
@@ -383,6 +389,13 @@ h6 {
   overflow: hidden;
 }
 
+/* Filter button styling */
+.filter-btn-selected {
+  background-color: rgb(var(--color-accent)) !important;
+  color: white !important;
+  border: none !important;
+}
+
 .liquid-morph-nav::before {
   content: "";
   position: absolute;
@@ -422,5 +435,3 @@ h6 {
 .liquid-morph-nav:hover .nav-text {
   text-shadow: 0 0 20px rgba(254, 113, 90, 0.6);
 }
-
-/* Remove the wiggle animation */
