@@ -172,6 +172,7 @@ h6 {
   border-color: rgb(var(--color-accent));
   transition: transform 0.16s;
 }
+
 .card-orange:hover {
   transform: translateY(-4px) scale(1.012);
   border-color: rgb(var(--color-accent-light));
